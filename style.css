@@ -43,6 +43,10 @@
   --radius-inputs: 0px;
   --radius-buttons: 20px;
   --radius-circular: 100%;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.16,.8,.24,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
 }
 
 @font-face {
@@ -63,6 +67,7 @@ body {
   color: var(--fragua-bosque);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -74,16 +79,50 @@ img, svg { display: block; max-width: 100%; }
   padding: clamp(60px, 10vw, 120px) clamp(20px, 5vw, 60px);
 }
 
+/* ---------- Entrada 3D por sección ---------- */
 .panel {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: perspective(1400px) rotateX(8deg) translateY(46px) scale(0.975);
+  transform-origin: 50% 100%;
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
 }
 
-.panel.in-view { opacity: 1; transform: translateY(0); }
+.panel.in-view {
+  opacity: 1;
+  transform: perspective(1400px) rotateX(0deg) translateY(0) scale(1);
+}
+
+/* ---------- Elementos internos: choreografía escalonada ---------- */
+/* El tilt (--rx/--ry) viaja incluido en el mismo transform para no pisar
+   la animación de entrada: nunca dos reglas de transform sobre lo mismo. */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(22px) perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transition-delay: calc(var(--stagger, 0) * 70ms);
+}
+
+.panel.in-view .reveal-item {
+  opacity: 1;
+  transform: translateY(0) perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+}
+
+/* ---------- Tilt 3D interactivo (mouse) ---------- */
+.tilt { transform-style: preserve-3d; transition: transform 0.5s var(--ease-out); }
+
+.tilt:not(.reveal-item) {
+  transform: perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+}
+
+.tilt:hover { transition: transform 0.12s linear; }
 
 @media (prefers-reduced-motion: reduce) {
-  .panel { opacity: 1; transform: none; transition: none; }
+  .panel, .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tilt { transform: none; transition: none; }
 }
 
 .eyebrow {
@@ -151,6 +190,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  perspective: 1000px;
 }
 
 .hero-scrim {
@@ -182,7 +222,10 @@ img, svg { display: block; max-width: 100%; }
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  transform-style: preserve-3d;
 }
+
+.hero-art { transform-style: preserve-3d; }
 
 .tagline-row {
   display: flex;
@@ -296,6 +339,7 @@ img, svg { display: block; max-width: 100%; }
 .metric-number {
   font-family: var(--font-azeret-mono);
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
   font-size: clamp(2.6rem, 9vw, 10.6rem);
   line-height: 0.9;
   letter-spacing: -0.08em;
