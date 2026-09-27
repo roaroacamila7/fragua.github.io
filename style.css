@@ -1,20 +1,19 @@
-/* ============ FRAGUA — estilo AYOCIN ============ */
+/* ============ FRAGUA — paleta y logo oficiales ============ */
 
 :root {
-  /* Colors */
-  --color-porcelain-cream: #fcf6ec;
-  --color-espresso-ink: #2e2521;
-  --color-espresso-surface: #2c2722;
-  --color-parchment-border: #d3ccc3;
-  --color-stone-haze: #cec1b2;
-  --color-ivory-sand: #f4e8d7;
-  --color-daylight-wash: #fdf0c7;
-  --color-peach-wash: #fdc6b3;
-  --gradient-sunlit-stone: linear-gradient(266.47deg, #c4b3a3 41.41%, #9f8e7a 97.58%);
+  /* Colores de marca Fragua */
+  --fragua-crema:  #FEFAF0;
+  --fragua-salvia: #B2B19E;
+  --fragua-bosque: #2E3A22;
+  --fragua-oxido:  #5E1304;
+  --fragua-musgo:  #899379;
+  --fragua-noche:  #233115;
 
-  /* Typography */
+  /* Typography (sin cambios: cuerpo en Manrope, métricas en Azeret Mono) */
   --font-systemia: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-azeret-mono: 'Azeret Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-logo: 'League Spartan', var(--font-systemia);
+  --font-masthead: 'Findel Display', var(--font-systemia);
 
   --text-caption: 12px;
   --text-body: 14px;
@@ -46,16 +45,22 @@
   --radius-circular: 100%;
 }
 
+@font-face {
+  font-family: "Findel Display";
+  src: url("assets/fonts/FindelDisplay-FRAGUA-subset.ttf") format("truetype");
+  font-display: block;
+}
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--color-porcelain-cream);
+  background: var(--fragua-crema);
   font-family: var(--font-systemia);
   font-weight: 400;
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -86,10 +91,30 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: var(--color-espresso-ink);
-  opacity: 0.6;
+  color: var(--fragua-bosque);
+  opacity: 0.65;
   margin-bottom: var(--spacing-14);
 }
+
+/* ---------- Logo (isotipo + wordmark) ---------- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fragua-bosque);
+}
+
+.logo-isotipo { width: 22px; height: auto; color: inherit; }
+
+.logo-word {
+  font-family: var(--font-logo);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  color: inherit;
+}
+
+.logo--on-dark { color: var(--fragua-crema); }
 
 /* ---------- Pills / buttons ---------- */
 .pill {
@@ -101,6 +126,9 @@ img, svg { display: block; max-width: 100%; }
   padding: 10px 60px 10px 20px;
   position: relative;
   transition: opacity 0.2s ease;
+  background: var(--fragua-oxido);
+  color: var(--fragua-crema);
+  border: 1px solid var(--fragua-oxido);
 }
 
 .pill::after {
@@ -113,22 +141,12 @@ img, svg { display: block; max-width: 100%; }
 
 .pill:hover { opacity: 0.85; }
 
-.pill--espresso {
-  background: var(--color-espresso-ink);
-  color: var(--color-porcelain-cream);
-  border: 1px solid var(--color-porcelain-cream);
-}
-
-.pill--porcelain {
-  background: var(--color-porcelain-cream);
-  color: var(--color-espresso-ink);
-  border: 1px solid var(--color-espresso-ink);
-}
+.pill--on-dark { border-color: var(--fragua-crema); }
 
 /* ============ HERO ============ */
 .hero {
   position: relative;
-  background: var(--gradient-sunlit-stone);
+  background: linear-gradient(266.47deg, var(--fragua-salvia) 41.41%, var(--fragua-musgo) 97.58%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -139,7 +157,7 @@ img, svg { display: block; max-width: 100%; }
   position: absolute;
   inset: 0 0 auto 0;
   height: 220px;
-  background: linear-gradient(to bottom, rgba(46,37,33,0.4), rgba(46,37,33,0));
+  background: linear-gradient(to bottom, rgba(35,49,21,0.35), rgba(35,49,21,0));
   pointer-events: none;
 }
 
@@ -152,18 +170,6 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--spacing-20);
   padding: var(--spacing-20) clamp(20px, 5vw, 60px);
 }
-
-.logo {
-  font-size: var(--text-nav);
-  font-weight: 500;
-  color: var(--color-porcelain-cream);
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.logo-mark { color: var(--color-peach-wash); font-size: 12px; }
 
 .hero-content {
   position: relative;
@@ -189,21 +195,22 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
   padding: 0 16px;
-  border-left: 1px solid rgba(46,37,33,0.3);
+  border-left: 1px solid rgba(46,58,34,0.3);
 }
 
 .tagline-row span:first-child { padding-left: 0; border-left: none; }
 
 .masthead {
-  font-family: var(--font-systemia);
-  font-weight: 500;
+  font-family: var(--font-masthead);
+  font-weight: 400;
+  text-transform: uppercase;
   font-size: clamp(3.5rem, 16vw, 15rem);
   line-height: 0.85;
-  letter-spacing: -0.02em;
+  letter-spacing: 0em;
   margin: 0 0 clamp(24px, 4vw, 48px);
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
 }
 
 .hero-art {
@@ -217,15 +224,15 @@ img, svg { display: block; max-width: 100%; }
   line-height: 1.15;
   margin: 0;
   max-width: 560px;
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
 }
 
 /* ============ PANELS (full-bleed bands) ============ */
-.panel--espresso { background: var(--color-espresso-ink); color: var(--color-porcelain-cream); }
-.panel--espresso-surface { background: var(--color-espresso-surface); color: var(--color-porcelain-cream); }
-.panel--daylight { background: var(--color-daylight-wash); color: var(--color-espresso-ink); }
-.panel--ivory { background: var(--color-ivory-sand); color: var(--color-espresso-ink); }
-.panel--peach { background: var(--color-peach-wash); color: var(--color-espresso-ink); }
+.panel--espresso { background: var(--fragua-bosque); color: var(--fragua-crema); }
+.panel--espresso-surface { background: var(--fragua-noche); color: var(--fragua-crema); }
+.panel--daylight { background: var(--fragua-crema); color: var(--fragua-bosque); }
+.panel--ivory { background: var(--fragua-salvia); color: var(--fragua-bosque); }
+.panel--peach { background: var(--fragua-crema); color: var(--fragua-bosque); }
 
 .feature-tabs {
   display: flex;
@@ -238,9 +245,9 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-body);
   font-weight: 400;
   padding: 10px 20px;
-  border: 1px solid rgba(252,246,236,0.1);
+  border: 1px solid rgba(254,250,240,0.15);
   border-radius: var(--radius-inputs);
-  color: var(--color-porcelain-cream);
+  color: var(--fragua-crema);
 }
 
 .feature-heading {
@@ -249,11 +256,11 @@ img, svg { display: block; max-width: 100%; }
   font-size: clamp(1.8rem, 4.4vw, var(--text-heading));
   line-height: 1;
   margin: 0 0 clamp(32px, 5vw, 56px);
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
   max-width: 900px;
 }
 
-.feature-heading--light { color: var(--color-porcelain-cream); }
+.feature-heading--light { color: var(--fragua-crema); }
 
 .feature-heading--xl {
   font-size: clamp(2.4rem, 7vw, var(--text-display));
@@ -269,8 +276,7 @@ img, svg { display: block; max-width: 100%; }
 .two-col p {
   font-size: var(--text-body);
   line-height: 1.4;
-  color: var(--color-porcelain-cream);
-  opacity: 0.85;
+  color: var(--fragua-musgo);
   margin: 0;
 }
 
@@ -293,20 +299,20 @@ img, svg { display: block; max-width: 100%; }
   font-size: clamp(2.6rem, 9vw, 10.6rem);
   line-height: 0.9;
   letter-spacing: -0.08em;
-  color: var(--color-espresso-ink);
+  color: var(--fragua-oxido);
 }
 
 .metric-number--small {
   font-size: clamp(2rem, 4vw, 3.75rem);
   letter-spacing: -0.06em;
-  color: var(--color-peach-wash);
+  color: var(--fragua-crema);
 }
 
 .metric-label {
   font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
 }
 
 /* ---------- Featured project ---------- */
@@ -318,7 +324,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .feature-card--translucent {
-  background: rgba(178,162,139,0.1);
+  background: rgba(137,147,121,0.14);
   border-radius: var(--radius-cards);
   padding: 0;
   backdrop-filter: blur(16px);
@@ -335,7 +341,8 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: var(--color-peach-wash);
+  color: var(--fragua-crema);
+  opacity: 0.75;
   padding-bottom: var(--spacing-14);
 }
 
@@ -346,7 +353,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .feature-item {
-  border-top: 1px solid rgba(252,246,236,0.12);
+  border-top: 1px solid rgba(254,250,240,0.14);
   padding-top: var(--spacing-20);
 }
 
@@ -354,13 +361,12 @@ img, svg { display: block; max-width: 100%; }
   margin: var(--spacing-8) 0 0;
   font-size: var(--text-body);
   line-height: 1.4;
-  color: var(--color-porcelain-cream);
-  opacity: 0.85;
+  color: var(--fragua-musgo);
   max-width: 420px;
 }
 
 .callout-card {
-  background: var(--color-porcelain-cream);
+  background: var(--fragua-crema);
   border-radius: var(--radius-cards);
   padding: var(--card-padding);
 }
@@ -370,12 +376,13 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-heading);
   font-weight: 500;
   line-height: 1.1;
-  color: var(--color-espresso-ink);
+  color: var(--fragua-bosque);
 }
 
 /* ---------- Content cards ---------- */
 .content-card {
-  background: var(--color-porcelain-cream);
+  background: var(--fragua-crema);
+  border: 1px solid var(--fragua-salvia);
   border-radius: var(--radius-cards);
   padding: var(--card-padding);
 }
@@ -391,7 +398,7 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-azeret-mono);
   font-weight: 500;
   font-size: 1.5rem;
-  color: var(--color-peach-wash);
+  color: var(--fragua-oxido);
   margin-bottom: var(--spacing-20);
 }
 
@@ -399,12 +406,14 @@ img, svg { display: block; max-width: 100%; }
   margin: 0 0 var(--spacing-8);
   font-size: 1.05rem;
   font-weight: 500;
+  color: var(--fragua-bosque);
 }
 
 .content-card p {
   margin: 0;
   font-size: var(--text-body);
   line-height: 1.4;
+  color: var(--fragua-bosque);
   opacity: 0.75;
 }
 
@@ -440,16 +449,16 @@ img, svg { display: block; max-width: 100%; }
   padding: var(--card-padding);
   font-size: 1.05rem;
   font-weight: 500;
-  color: var(--color-porcelain-cream);
-  background: linear-gradient(to top, rgba(46,37,33,0.65), transparent);
+  color: var(--fragua-crema);
+  background: linear-gradient(to top, rgba(35,49,21,0.7), transparent);
   border-radius: 0 0 var(--radius-cards) var(--radius-cards);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .project-overlay--dark {
-  color: var(--color-espresso-ink);
-  background: linear-gradient(to top, rgba(252,246,236,0.85), transparent);
+  color: var(--fragua-bosque);
+  background: linear-gradient(to top, rgba(254,250,240,0.85), transparent);
 }
 
 .project-card:hover .project-overlay { opacity: 1; }
@@ -460,8 +469,7 @@ img, svg { display: block; max-width: 100%; }
   font-weight: 400;
   line-height: 1.25;
   max-width: 640px;
-  color: var(--color-porcelain-cream);
-  opacity: 0.85;
+  color: var(--fragua-musgo);
   margin: 0 0 clamp(32px, 5vw, 48px);
 }
 
@@ -471,19 +479,19 @@ img, svg { display: block; max-width: 100%; }
   gap: clamp(20px, 3vw, 40px);
   margin-top: clamp(40px, 6vw, 60px);
   padding-top: var(--spacing-20);
-  border-top: 1px solid rgba(252,246,236,0.12);
+  border-top: 1px solid rgba(254,250,240,0.14);
 }
 
 .underline-link {
   font-size: var(--text-body);
   font-weight: 500;
-  color: var(--color-porcelain-cream);
-  border-bottom: 1px solid rgba(252,246,236,0.4);
+  color: var(--fragua-crema);
+  border-bottom: 1px solid rgba(254,250,240,0.4);
   padding-bottom: 2px;
 }
 
 /* ============ FOOTER ============ */
-.site-footer { background: var(--color-espresso-ink); }
+.site-footer { background: var(--fragua-noche); }
 
 .footer-inner {
   padding-top: var(--spacing-40);
@@ -493,13 +501,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-20);
-  border-top: 1px solid rgba(252,246,236,0.12);
-}
-
-.footer-logo {
-  font-size: var(--text-nav);
-  font-weight: 500;
-  color: var(--color-porcelain-cream);
+  border-top: 1px solid rgba(254,250,240,0.12);
 }
 
 .footer-links, .footer-socials {
@@ -510,7 +512,7 @@ img, svg { display: block; max-width: 100%; }
 .footer-links a, .footer-socials a {
   font-size: var(--text-caption);
   font-weight: 500;
-  color: var(--color-porcelain-cream);
+  color: var(--fragua-crema);
   opacity: 0.7;
 }
 
@@ -518,7 +520,7 @@ img, svg { display: block; max-width: 100%; }
 
 .footer-year {
   font-size: var(--text-caption);
-  color: rgba(252,246,236,0.5);
+  color: rgba(254,250,240,0.5);
   width: 100%;
   order: 5;
 }
