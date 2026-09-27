@@ -1,7 +1,7 @@
 // FRAGUA — scroll reveal + micro-interacciones
 
 document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.reveal');
+  const cards = document.querySelectorAll('.panel');
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
